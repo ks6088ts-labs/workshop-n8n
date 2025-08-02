@@ -1,0 +1,31 @@
+{
+  // 💡 Inputs are prompted on first server start, then stored securely by VS Code.
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "N8N_API_KEY",
+      "description": "n8n API Key",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "N8N_API_URL",
+      "description": "n8n API URL",
+      "password": false
+    }
+  ],
+  "servers": {
+    // n8n-MCP server: https://github.com/czlonkowski/n8n-mcp
+    "n8n-mcp": {
+      "command": "npx",
+      "args": ["n8n-mcp"],
+      "env": {
+        "MCP_MODE": "stdio",
+        "LOG_LEVEL": "error",
+        "DISABLE_CONSOLE_OUTPUT": "true",
+        "N8N_API_URL": "${input:N8N_API_URL}",
+        "N8N_API_KEY": "${input:N8N_API_KEY}"
+      }
+    }
+  }
+}
